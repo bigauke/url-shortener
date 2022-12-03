@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %} Encurtador de URL {% endblock %}
+{% block main %}
+
+
+<h1>Encurtador de URL</h1>
+
+
+<form action="your-url" method="post">
+
+    <label for="url">Website URL</label>
+    <input type="url" name="url" value="" required>
+    <br>
+    <label for="code">Nome Curto</label>
+    <input type="text" name="code" value="" required>
+    <br>
+    <input type="submit" value="Encurtador">
+</form>
+
+<form action="your-url" method="post" enctype="multipart/form-data">
+
+    <label for="file">Arquivo</label>
+    <input type="file" name="file" value="" required>
+    <br>
+    <label for="code">Nome Curto</label>
+    <input type="text" name="code" value="" required>
+    <br>
+    <input type="submit" value="Encurtador">
+</form>
+
+{% if codes %}
+<h1>Códigos que vc criou</h1>
+<ul>
+    {% for code in codes %}
+    <a href="{{ url_for('redirect_to_url', code=code) }}">
+    <li>{{ code }}</li>
+    </a>
+    {% endfor %}
+</ul>
+{% endif%}
+
+{% endblock %} 
